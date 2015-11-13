@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>4_generators_promises.litcoffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>4_generators_promises.litcoffee</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="1_nodestyle.html">
+                    1_nodestyle.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="2_promises_q.html">
+                    2_promises_q.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="3_es6_generators.html">
+                    3_es6_generators.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="4_generators_promises.html">
+                    4_generators_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_callbacks.html">
+                    client_callbacks.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_promises.html">
+                    client_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="index.html">
+                    index.litcoffee
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <h3 id="generators-q-js-an-example-with-some-helper-functions">Generators + Q.js: An example with some helper functions</h3>
+<p>I took liberty of creating a couple of utility functions that can be injiected in Q to simplify
+the workflow called <code>Q.each</code> and <code>Q.genrun</code>.</p>
+<p>Here is an example of how i use them</p>
+
+        
+          <div class='highlight'><pre>Q = <span class="hljs-built_in">require</span> <span class="hljs-string">'q'</span></pre></div>
+        
+      
+        
+        <p>A serialized version of Q.all</p>
+
+        
+          <div class='highlight'><pre>Q.each = <span class="hljs-function"><span class="hljs-params">(collection, iterator)</span> -&gt;</span>
+  cur = Q()
+  promises = collection.map (item) -&gt;
+    cur = cur.<span class="hljs-keyword">then</span> -&gt;
+      iterator(item)
+  Q.all(promises)</pre></div>
+        
+      
+        
+        <p>A function that turns a generator into a promise</p>
+
+        
+          <div class='highlight'><pre>Q.genrun = <span class="hljs-function"><span class="hljs-params">(generator)</span> -&gt;</span> Q.async(generator)()</pre></div>
+        
+      
+        
+        <p>Example combined usage</p>
+
+        
+          <div class='highlight'><pre>client = <span class="hljs-built_in">require</span> <span class="hljs-string">'./client_promises'</span>
+
+Q.genrun -&gt;
+  
+  yield client.login(<span class="hljs-string">'davide'</span>, <span class="hljs-string">'pass'</span>)
+  <span class="hljs-built_in">console</span>.log <span class="hljs-string">'logged in'</span>
+  
+  posts = yield client.getPosts(<span class="hljs-string">'alberto'</span>)
+  <span class="hljs-built_in">console</span>.log <span class="hljs-string">'got posts'</span>, posts
+  
+  results = yield Q.each posts, <span class="hljs-function"><span class="hljs-params">(post)</span> -&gt;</span>
+    <span class="hljs-built_in">console</span>.log <span class="hljs-string">'counting likes on post'</span>, post
+    client.countPostLikes(post)
+
+  yield client.logout()
+  <span class="hljs-built_in">console</span>.log <span class="hljs-string">'logged out'</span>
+  
+  yield results
+  
+.<span class="hljs-keyword">then</span> (val) -&gt;
+  <span class="hljs-built_in">console</span>.log <span class="hljs-string">'completed'</span>, val
+  
+.<span class="hljs-keyword">catch</span> (e) -&gt;
+  <span class="hljs-built_in">console</span>.error <span class="hljs-string">'ERROR:'</span>, e</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

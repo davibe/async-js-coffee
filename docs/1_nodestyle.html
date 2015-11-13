@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>1_nodestyle.litcoffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>1_nodestyle.litcoffee</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="1_nodestyle.html">
+                    1_nodestyle.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="2_promises_q.html">
+                    2_promises_q.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="3_es6_generators.html">
+                    3_es6_generators.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="4_generators_promises.html">
+                    4_generators_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_callbacks.html">
+                    client_callbacks.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_promises.html">
+                    client_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="index.html">
+                    index.litcoffee
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <h3 id="node-style-callbacks">Node-style callbacks</h3>
+<p>Require a callback-based implementation of the client</p>
+
+        
+          <div class='highlight'><pre>client = <span class="hljs-built_in">require</span> <span class="hljs-string">'./client_callbacks'</span></pre></div>
+        
+      
+        
+        <p>Use it</p>
+
+        
+          <div class='highlight'><pre>client.login <span class="hljs-string">'davide'</span>, <span class="hljs-string">'pass'</span>, <span class="hljs-function"><span class="hljs-params">(e)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> e <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> consol.error <span class="hljs-string">'should handle error here..'</span>
+  
+  client.getPosts <span class="hljs-string">'albertop'</span>, <span class="hljs-function"><span class="hljs-params">(e1, posts)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> e1 <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> consol.error <span class="hljs-string">'should handle error here..'</span>
+    
+    results = []
+<span class="hljs-function">    <span class="hljs-title">next</span> = <span class="hljs-params">(e3, partialResult)</span> -&gt;</span>
+      <span class="hljs-keyword">if</span> e3 <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> consol.error <span class="hljs-string">'should handle error here..'</span>
+      
+      <span class="hljs-keyword">if</span> partialResult <span class="hljs-keyword">then</span> results.push(partialResult)
+      post = posts.pop()
+      <span class="hljs-keyword">if</span> post
+        client.countPostLikes(post, next)
+      <span class="hljs-keyword">else</span>
+        client.logout (e2) -&gt;
+          <span class="hljs-keyword">if</span> e2 <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.error <span class="hljs-string">'should handle error here..'</span></pre></div>
+        
+      
+        
+        <h4 id="comments">Comments</h4>
+<ul>
+<li>callback hell</li>
+<li>hacky way to collect partial results</li>
+<li>code out of order w.r.t. execution</li>
+<li>messy and poor error handling</li>
+<li>async.js library would solve a lot here i know. Anybody cares to send me an example ?</li>
+</ul>
+
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

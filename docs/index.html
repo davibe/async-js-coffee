@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Async programming in JS/Coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          
+          <h1 id="async-programming-in-js-coffee">Async programming in JS/Coffee</h1>
+<p>Imagine we have a client library that talks to a server asynchronously</p>
+<ul>
+<li><strong>client.login(u, p, ..)</strong> : LogIn with username and password</li>
+<li><strong>client.getPosts(userId, ..)</strong> : Get array of posts of a user</li>
+<li><strong>client.countPostLike(post, ..)</strong> : Like one post</li>
+<li><strong>client.logout(..)</strong> : Log out current user</li>
+</ul>
+<p>Now imagine you want to like all the posts of a user one by one (serialized) and logout, using plain old-style js and node-style callbacks.</p>
+<p>You can implement this in many ways. Let me discuss some</p>
+<ol>
+<li><a href="1_nodestyle.html">Node-style callbacks</a></li>
+<li><a href="2_promises_q.html">Promises (Q.js)</a></li>
+<li><a href="3_es6_generators.html">ES6 Generators/yield</a></li>
+<li><a href="4_generators_promises.html">Generators and promises (Q.js) together</a></li>
+</ol>
+<h4 id="further-readings">Further readings</h4>
+<p>If you are interested into generators and async stuff without promises I suggest you go on reading <a href="http://jlongster.com/A-Closer-Look-at-Generators-Without-Promises">this article</a>. I personally prefer promises.</p>
+
+          
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="1_nodestyle.html">
+                    1_nodestyle.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="2_promises_q.html">
+                    2_promises_q.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="3_es6_generators.html">
+                    3_es6_generators.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="4_generators_promises.html">
+                    4_generators_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_callbacks.html">
+                    client_callbacks.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="client_promises.html">
+                    client_promises.litcoffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="index.html">
+                    index.litcoffee
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
