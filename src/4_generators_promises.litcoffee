@@ -1,7 +1,6 @@
-### Generators + Q.js: An example with some helper functions
+### Using Generators and promises (Q.js)
 
-I took liberty of creating a couple of utility functions that can be injiected in Q to simplify
-the workflow called `Q.each` and `Q.genrun`.
+I took liberty to extend `Q` by adding a couple of utility functions to simplify the workflow called `Q.each` and `Q.genrun`.
 
 Here is an example of how i use them
 
@@ -20,9 +19,8 @@ A function that turns a generator into a promise
 
     Q.genrun = (generator) -> Q.async(generator)()
 
-
 Example combined usage
-    
+
     client = require './client_promises'
 
     Q.genrun ->
