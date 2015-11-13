@@ -2,11 +2,9 @@
 
 I took liberty to extend `Q` by adding a couple of utility functions to simplify the workflow called `Q.each` and `Q.genrun`.
 
-Here is an example of how i use them
-
     Q = require 'q'
 
-A serialized version of Q.all
+A serialized version of `Q.all`
 
     Q.each = (collection, iterator) ->
       cur = Q()
@@ -18,6 +16,7 @@ A serialized version of Q.all
 A function that turns a generator into a promise
 
     Q.genrun = (generator) -> Q.async(generator)()
+
 
 Example combined usage
 
